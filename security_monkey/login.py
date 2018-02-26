@@ -1,5 +1,5 @@
 from flask_login import LoginManager
-from flask_security.utils import localize_callback, config_value
+from flask_security.utils import config_value
 from flask_security.core import AnonymousUser, _user_loader, _request_loader, _security
 from datetime import datetime
 
@@ -12,7 +12,6 @@ def default_login_manager(anonymous_user, request_loader=None, user_loader=None)
     """
     lm = LoginManager()
     lm.anonymous_user = anonymous_user or AnonymousUser
-    lm.localize_callback = localize_callback
     lm.login_view = '%s.login' % config_value('BLUEPRINT_NAME', app=app)
     lm.user_loader(user_loader or _user_loader)
     lm.request_loader(request_loader or _request_loader)

@@ -91,5 +91,5 @@ _PROVIDERS = {
   'header': create_header_login_manager,
 }
 
-def get_provider(name, default=None):
+def get(name, default=None):
     return _PROVIDERS.get(name, default)

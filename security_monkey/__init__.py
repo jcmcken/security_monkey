@@ -104,11 +104,11 @@ from flask_security.core import Security
 from flask_security.datastore import SQLAlchemyUserDatastore
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 
-import security_monkey.login
+import security_monkey.login_managers
 
 security_kwargs = {}
 
-login_manager = security_monkey.login.get_provider(
+login_manager = security_monkey.login_managers.get(
   app.config.get('SECURITY_MONKEY_LOGIN_PROVIDER', None)
 )
 

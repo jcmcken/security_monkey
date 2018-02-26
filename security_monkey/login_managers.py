@@ -5,7 +5,7 @@ from datetime import datetime
 
 ROLES = ['View', 'Comment', 'Justify', 'Admin']
 
-def default_login_manager(anonymous_user, request_loader=None, user_loader=None):
+def default_login_manager(app, anonymous_user, request_loader=None, user_loader=None):
     """
     Setup a LoginManager similar to the Flask-Security default. This does not
     initialize the app.
@@ -78,7 +78,7 @@ def header_request_loader(request):
     return user
 
 def create_header_login_manager(app):
-    lm = default_login_manager(
+    lm = default_login_manager(app,
       # with header-based auth, anonymous users are denied at the frontend proxy
       anonymous_user=None,
       # override Flask-Security default request loader

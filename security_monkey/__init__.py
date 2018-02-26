@@ -103,8 +103,19 @@ from security_monkey.datastore import User, Role
 from flask_security.core import Security
 from flask_security.datastore import SQLAlchemyUserDatastore
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security(app, user_datastore)
 
+import security_monkey.login
+
+security_kwargs = {}
+
+login_manager = security_monkey.login.get_provider(
+  app.config.get('SECURITY_MONKEY_LOGIN_PROVIDER', None)
+)
+
+if login_manager:
+    security_kwargs['login_manager'] = login_manager(app)
+
+security = Security(app, user_datastore, **security_kwargs)
 
 @security.send_mail_task
 def send_email(msg):

@@ -64,7 +64,7 @@ def header_request_loader(request):
         if email:
             kwargs['email'] = email
 
-        if role in ROLES
+        if role in ROLES:
             kwargs['role'] = role
 
         return datastore.create_user(**kwargs)
